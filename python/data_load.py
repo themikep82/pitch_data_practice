@@ -2,7 +2,6 @@ import os
 import requests
 import pandas as pd
 import psycopg2
-import os
 from credentials import *
 from api_endpoint import *
 
