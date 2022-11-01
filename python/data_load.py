@@ -6,10 +6,14 @@ import os
 from credentials import *
 from api_endpoint import *
 
+#set working directory to .py file current directory
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 
 def main():
+    #retrieves a list of api endpoints from api_endpoint.py and iterates through them,
+    #writing them to postgres instance defined in credentials.py
+    #run the schema_init.sql file against the instance before running this code
 
     for source in sources:
 
