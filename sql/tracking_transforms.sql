@@ -9,7 +9,7 @@ WITH non_numeric_tokens_fixed AS (
         SELECT quotes_fixed_json
         FROM quotes_fixed)
 SELECT 
-    REPLACE(quotes_fixed_json, 'None', '-1')::json AS tracking_json
+    REPLACE(quotes_fixed_json, 'None', '')::json AS tracking_json
 INTO staging_data.tracking
 FROM non_numeric_tokens_fixed;
 
