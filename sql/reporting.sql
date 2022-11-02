@@ -18,6 +18,21 @@ INTO reporting.pitches_ab_index_gaps
 FROM at_bat_gaps
 WHERE next_at_bat != at_bat_index + 1;
 
+--Identify gaps in the pitchno in the tracking data
+WITH pitchno_gaps AS (
+
+    SELECT
+        pitchno,
+        LEAD(pitchno) OVER (ORDER BY pitchno) AS next_pitchno
+    FROM core_data.tracking 
+)
+SELECT
+    pitchno + 1 AS pitchno_gap_start,
+    next_pitchno - 1 AS pitchno_gap_end
+INTO reporting.tracking_pitchno_gaps
+FROM pitchno_gaps
+WHERE next_pitchno != pitchno + 1;
+
 --Some aggregates for pitchers using tracking data. Would be more useful with pitch classification (2-seam, 4-seam, slider, change, etc)
 SELECT
     pitcher,
